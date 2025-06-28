@@ -3,7 +3,7 @@ import 'package:dart_guard/app/modules/auth/login/widgets/custom_check.dart';
 import 'package:dart_guard/app/modules/auth/login/widgets/forgot_password.dart';
 import 'package:dart_guard/app/modules/auth/login/widgets/login_mode_selector.dart';
 import 'package:dart_guard/app/modules/auth/login/widgets/login_button.dart';
-import 'package:dart_guard/app/modules/auth/widgets/auth_text_field.dart';
+import 'package:dart_guard/app/modules/auth/login/widgets/login_text_field.dart';
 import 'package:dart_guard/app/shared/formatters/cpf_input_formatters.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,13 +45,19 @@ class LoginForm extends StatelessWidget {
                       children: [
                         menuLogin,
                         const SizedBox(height: 30),
-                        AuthTextField(
+                        LoginTextField(
                           label: 'CPF',
                           controller: state.documentController,
                           inputFormatters: [CpfInputFormatter()],
+                          error: state.errorDocument,
                         ),
                         const SizedBox(height: 10),
-                        AuthTextField(label: 'Senha', controller: state.passwordController, isPassword: true),
+                        LoginTextField(
+                          label: 'Senha',
+                          controller: state.passwordController,
+                          isPassword: true,
+                          error: state.errorPassword,
+                        ),
                         const SizedBox(height: 30),
                         Row(
                           children: [
@@ -69,20 +75,32 @@ class LoginForm extends StatelessWidget {
                       children: [
                         menuLogin,
                         const SizedBox(height: 30),
-                        AuthTextField(label: 'EMAIL', controller: state.registerEmailcontroller, isEmail: true),
-                        const SizedBox(height: 10),
-                        AuthTextField(
-                          label: 'CPF',
-                          controller: state.registerDocumentcontroller,
-                          inputFormatters: [CpfInputFormatter()],
+                        LoginTextField(
+                          label: 'EMAIL',
+                          controller: state.registerEmailController,
+                          isEmail: true,
+                          error: state.errorRegisterEmail,
                         ),
                         const SizedBox(height: 10),
-                        AuthTextField(label: 'SENHA', controller: state.registerPasswordController, isPassword: true),
+                        LoginTextField(
+                          label: 'CPF',
+                          controller: state.registerDocumentController,
+                          inputFormatters: [CpfInputFormatter()],
+                          error: state.errorRegisterDocument,
+                        ),
                         const SizedBox(height: 10),
-                        AuthTextField(
+                        LoginTextField(
+                          label: 'SENHA',
+                          controller: state.registerPasswordController,
+                          isPassword: true,
+                          error: state.errorRegisterPassword,
+                        ),
+                        const SizedBox(height: 10),
+                        LoginTextField(
                           label: 'CONFIRMAÇÃO DE SENHA',
                           controller: state.registerConfirmPasswordController,
                           isPassword: true,
+                          error: state.errorRegisterConfirmPassword,
                         ),
                       ],
                     );
@@ -101,7 +119,10 @@ class LoginForm extends StatelessWidget {
                 ),
                 Consumer<LoginViewmodel>(
                   builder: (context, state, _) {
-                    return LoginButtom(onTap: state.doLogin, isLoading: state.isLoading);
+                    return LoginButtom(
+                      onTap: state.inLoginMode ? state.doLogin : state.doRegister,
+                      isLoading: state.isLoading,
+                    );
                   },
                 ),
               ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AuthTextField extends StatelessWidget {
+class LoginTextField extends StatelessWidget {
   final String label;
   final TextEditingController? controller;
   final bool isPassword;
@@ -9,7 +9,7 @@ class AuthTextField extends StatelessWidget {
   final bool isEmail;
   final List<TextInputFormatter> inputFormatters;
 
-  const AuthTextField({
+  const LoginTextField({
     super.key,
     required this.label,
     this.controller,
