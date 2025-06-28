@@ -1,9 +1,12 @@
+import 'package:dart_guard/app/shared/theme/theme_constants.dart';
+import 'package:dart_guard/app/shared/widgets/custom_loading.dart';
 import 'package:flutter/material.dart';
 
 class LoginButtom extends StatelessWidget {
   final Function() onTap;
+  final bool isLoading;
 
-  const LoginButtom({super.key, required this.onTap});
+  const LoginButtom({super.key, required this.onTap, required this.isLoading});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,7 @@ class LoginButtom extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.all(7),
           decoration: BoxDecoration(
             color: Color(0xff2c2b3b),
             borderRadius: BorderRadius.circular(200),
@@ -21,10 +24,13 @@ class LoginButtom extends StatelessWidget {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
+              gradient: ThemeConstants.defaultGradient,
               borderRadius: BorderRadius.circular(200),
             ),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.arrow_forward, size: 30)]),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [isLoading ? CustomLoading() : Icon(Icons.arrow_forward, size: 30)],
+            ),
           ),
         ),
       ),

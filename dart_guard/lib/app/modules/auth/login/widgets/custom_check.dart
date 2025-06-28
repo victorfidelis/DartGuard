@@ -32,7 +32,11 @@ class _CustomCheckState extends State<CustomCheck> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Icon(currentValue ? Icons.check_circle : Icons.circle_outlined, size: 28),
+            child: Icon(
+              currentValue ? Icons.check_circle : Icons.circle_outlined,
+              size: 28,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           ),
           Text(widget.label),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AuthTextField extends StatelessWidget {
   final String label;
@@ -6,6 +7,7 @@ class AuthTextField extends StatelessWidget {
   final bool isPassword;
   final String? error;
   final bool isEmail;
+  final List<TextInputFormatter> inputFormatters;
 
   const AuthTextField({
     super.key,
@@ -14,6 +16,7 @@ class AuthTextField extends StatelessWidget {
     this.isPassword = false,
     this.error,
     this.isEmail = false,
+    this.inputFormatters = const [],
   });
 
   
@@ -29,11 +32,14 @@ class AuthTextField extends StatelessWidget {
       keyboardType: _keyboardType(),
       obscureText: isPassword,
       controller: controller,
+      inputFormatters: inputFormatters,
     );
   }
 
   TextInputType _keyboardType() {
-    if (isPassword) {
+    if (isEmail) {
+      return TextInputType.emailAddress;
+    } else if (isPassword) {
       return TextInputType.visiblePassword;
     } else {
       return TextInputType.text;

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ItemMenuLogin extends StatelessWidget {
+class LoginModeSelector extends StatelessWidget {
   final String label;
   final bool selected;
-  const ItemMenuLogin({super.key, required this.label, required this.selected});
+  final Function() onTap;
+  const LoginModeSelector({super.key, required this.label, required this.selected, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,6 @@ class ItemMenuLogin extends StatelessWidget {
       textStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
     }
 
-    return Text(label, style: textStyle);
+    return GestureDetector(onTap: onTap, child: Text(label, style: textStyle));
   }
 }
