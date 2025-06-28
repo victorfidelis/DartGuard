@@ -1,4 +1,4 @@
-import 'package:dart_guard/app/modules/main/models/hire.dart';
+import 'package:dart_guard/app/modules/main/models/contract.dart';
 import 'package:dart_guard/app/modules/main/views/home/widgets/contract_card.dart';
 import 'package:dart_guard/app/modules/main/views/home/widgets/title_section.dart';
 import 'package:flutter/material.dart';
