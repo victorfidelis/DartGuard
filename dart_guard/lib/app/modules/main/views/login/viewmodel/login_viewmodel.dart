@@ -1,8 +1,16 @@
+import 'package:dart_guard/app/modules/main/models/user.dart';
+import 'package:dart_guard/app/modules/main/services/login/login_service.dart';
+import 'package:dart_guard/app/shared/either/either.dart';
 import 'package:flutter/material.dart';
 
 enum LoginMode { login, register }
 
 class LoginViewmodel extends ChangeNotifier {
+  LoginService loginService;
+  final Function(User user) onSuccessfulLogin;
+  
+  LoginViewmodel({required this.loginService, required this.onSuccessfulLogin});
+
   LoginMode loginMode = LoginMode.login;
   bool isLoading = false;
 
@@ -13,6 +21,9 @@ class LoginViewmodel extends ChangeNotifier {
   final TextEditingController registerDocumentController = TextEditingController();
   final TextEditingController registerPasswordController = TextEditingController();
   final TextEditingController registerConfirmPasswordController = TextEditingController();
+
+  String? loginError;
+  String? registerError;
 
   String? errorDocument;
   String? errorPassword;
@@ -61,7 +72,17 @@ class LoginViewmodel extends ChangeNotifier {
     }
 
     setToLoading();
-    await Future.delayed(Duration(seconds: 5));
+
+    final signInEither = await loginService.signIn(
+      document: documentController.text,
+      password: passwordController.text,
+    );
+    if (signInEither.isLeft) {
+      loginError = signInEither.left!.message;
+    } else {
+      onSuccessfulLogin(signInEither.right!);
+    }
+
     setToLoaded();
   }
 
@@ -137,6 +158,8 @@ class LoginViewmodel extends ChangeNotifier {
   }
 
   void _clearErrors() {
+    loginError = null;
+    registerError = null;
     errorDocument = null;
     errorPassword = null;
     errorRegisterDocument = null;

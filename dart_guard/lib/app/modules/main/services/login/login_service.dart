@@ -11,7 +11,7 @@ class LoginService {
 
   LoginService({required this.authRepository, required this.userRepository});
 
-  Future<Either<Failure, Unit>> signIn({required String document, required String password}) async {
+  Future<Either<Failure, User>> signIn({required String document, required String password}) async {
     final userEither = await userRepository.getUserByDocument((document));
     if (userEither.isLeft) {
       return Either.left(Failure(userEither.left!.message));
@@ -23,7 +23,7 @@ class LoginService {
       return Either.left(Failure(authEither.left!.message));
     }
 
-    return Either.right(unit);
+    return Either.right(user);
   }
 
   Future<Either<Failure, Unit>> registerUser({required User user, required String password}) async {

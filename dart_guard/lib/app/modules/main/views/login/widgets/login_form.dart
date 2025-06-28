@@ -5,6 +5,7 @@ import 'package:dart_guard/app/modules/main/views/login/widgets/login_mode_selec
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_button.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_text_field.dart';
 import 'package:dart_guard/app/shared/formatters/cpf_input_formatters.dart';
+import 'package:dart_guard/app/shared/widgets/custom_text_error.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -58,6 +59,8 @@ class LoginForm extends StatelessWidget {
                           isPassword: true,
                           error: state.errorPassword,
                         ),
+                        const SizedBox(height: 10),
+                        state.loginError != null ? CustomTextError(message: state.loginError!) : SizedBox(),
                         const SizedBox(height: 30),
                         Row(
                           children: [
@@ -102,6 +105,8 @@ class LoginForm extends StatelessWidget {
                           isPassword: true,
                           error: state.errorRegisterConfirmPassword,
                         ),
+                        const SizedBox(height: 10),
+                        state.registerError != null ? CustomTextError(message: state.registerError!) : SizedBox(), 
                       ],
                     );
                   }
