@@ -1,6 +1,6 @@
 import 'package:dart_guard/app/modules/main/views/login/viewmodel/login_viewmodel.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/custom_check.dart';
-import 'package:dart_guard/app/modules/main/views/login/widgets/forgot_password.dart';
+import 'package:dart_guard/app/shared/widgets/custom_text_link.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_mode_selector.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_button.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_text_field.dart';
@@ -68,7 +68,7 @@ class LoginForm extends StatelessWidget {
                             Expanded(
                               child: CustomCheck(label: 'Lembrar sempre', initialValue: false, onChange: (value) {}),
                             ),
-                            ForgotPassword(),
+                            CustomTextLink(label: 'Esqueceu a senha?', onTap: () {}),
                           ],
                         ),
                       ],

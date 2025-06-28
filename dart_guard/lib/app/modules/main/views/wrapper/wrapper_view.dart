@@ -1,6 +1,6 @@
-import 'package:dart_guard/app/modules/main/views/home/views/home_view.dart';
+import 'package:dart_guard/app/modules/main/views/home/home_view.dart';
 import 'package:dart_guard/app/modules/main/views/login/login_view.dart';
-import 'package:dart_guard/app/modules/main/views/wrapper/wrapper_viewmodel.dart';
+import 'package:dart_guard/app/modules/main/views/wrapper/viewmodel/wrapper_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,5 +1,5 @@
 import 'package:dart_guard/app/modules/main/views/home/widgets/user_image.dart';
-import 'package:dart_guard/app/modules/main/views/wrapper/wrapper_viewmodel.dart';
+import 'package:dart_guard/app/modules/main/views/wrapper/viewmodel/wrapper_viewmodel.dart';
 import 'package:dart_guard/app/shared/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
