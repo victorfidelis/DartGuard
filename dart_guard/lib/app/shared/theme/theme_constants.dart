@@ -6,4 +6,6 @@ class ThemeConstants {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static const Color containerBackgroung = Color(0xff2c2b3b);
 }

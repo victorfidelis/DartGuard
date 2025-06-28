@@ -1,6 +1,7 @@
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_form.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/social_media_links.dart';
 import 'package:dart_guard/app/shared/theme/theme_constants.dart';
+import 'package:dart_guard/app/shared/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -21,10 +22,13 @@ class _LoginViewState extends State<LoginView> {
               Expanded(
                 flex: 2,
                 child: Container(
-                  padding: EdgeInsets.only(left: 50, top: 130, right: 50),
+                  padding: EdgeInsets.only(left: 50, top: 80, right: 50),
                   decoration: BoxDecoration(gradient: ThemeConstants.defaultGradient),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 34, child: AppLogo()),
+                      SizedBox(height: 20),
                       Row(children: [Text('Bem vindo!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900))]),
                       SizedBox(height: 10),
                       Text(

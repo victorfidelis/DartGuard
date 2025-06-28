@@ -59,8 +59,6 @@ class MaterialTheme {
 
   static AppBarTheme darkAppBarTheme(ColorScheme colorScheme) {
     return AppBarTheme(
-      backgroundColor: colorScheme.primaryContainer,
-      foregroundColor: colorScheme.onSurface,
       iconTheme: IconThemeData(color: colorScheme.onSurface),
       systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: colorScheme.primaryContainer,

@@ -5,6 +5,7 @@ import 'package:dart_guard/app/modules/main/views/login/widgets/login_mode_selec
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_button.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_text_field.dart';
 import 'package:dart_guard/app/shared/formatters/cpf_input_formatters.dart';
+import 'package:dart_guard/app/shared/theme/theme_constants.dart';
 import 'package:dart_guard/app/shared/widgets/custom_text_error.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class LoginForm extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(left: 24, top: 30, right: 24, bottom: 12),
               decoration: BoxDecoration(
-                color: Color(0xff2c2b3b),
+                color: ThemeConstants.containerBackgroung,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
               ),
               child: Consumer<LoginViewmodel>(
@@ -112,7 +113,7 @@ class LoginForm extends StatelessWidget {
                           error: state.errorRegisterConfirmPassword,
                         ),
                         const SizedBox(height: 10),
-                        state.registerError != null ? CustomTextError(message: state.registerError!) : SizedBox(), 
+                        state.registerError != null ? CustomTextError(message: state.registerError!) : SizedBox(),
                       ],
                     );
                   }
@@ -124,8 +125,11 @@ class LoginForm extends StatelessWidget {
                 Container(
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Color(0xff2c2b3b),
+                    color: ThemeConstants.containerBackgroung,
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12), bottomRight: Radius.circular(12)),
+                    boxShadow: [
+                      BoxShadow(color: Color(0xff101010), offset: Offset(0, 6), spreadRadius: -2, blurRadius: 4),
+                    ],
                   ),
                 ),
                 Consumer<LoginViewmodel>(
