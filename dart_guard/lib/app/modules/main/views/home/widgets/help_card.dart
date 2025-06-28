@@ -18,7 +18,7 @@ class HelpCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 50, child: UserImage()),
-              SizedBox(height: 12),
+              SizedBox(height: 8),
               Text(
                 'Dúvidas?',
                 textAlign: TextAlign.center,

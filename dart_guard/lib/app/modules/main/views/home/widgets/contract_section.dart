@@ -13,15 +13,17 @@ class ContractSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: TitleSection('Cotar e Contratar'),
-        ),
+        Padding(padding: const EdgeInsets.only(left: 24), child: TitleSection('Cotar e Contratar')),
         SizedBox(
           height: 130,
-          child: ListView(scrollDirection: Axis.horizontal, children: [
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
               SizedBox(width: 24),
-              ContractCard(contract: Contract(name: 'Automóvel', image: 'car.png')),
+              ContractCard(
+                contract: Contract(name: 'Automóvel', image: 'car.png'),
+                onTap: () => Navigator.pushNamed(context, '/webview', arguments: {'url': 'https://nava.com.br/'}),
+              ),
               SizedBox(width: 10),
               ContractCard(contract: Contract(name: 'Residência', image: 'house.png')),
               SizedBox(width: 10),
