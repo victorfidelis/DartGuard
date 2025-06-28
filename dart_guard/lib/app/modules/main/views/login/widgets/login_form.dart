@@ -1,9 +1,9 @@
-import 'package:dart_guard/app/modules/auth/login/viewmodel/login_viewmodel.dart';
-import 'package:dart_guard/app/modules/auth/login/widgets/custom_check.dart';
-import 'package:dart_guard/app/modules/auth/login/widgets/forgot_password.dart';
-import 'package:dart_guard/app/modules/auth/login/widgets/login_mode_selector.dart';
-import 'package:dart_guard/app/modules/auth/login/widgets/login_button.dart';
-import 'package:dart_guard/app/modules/auth/login/widgets/login_text_field.dart';
+import 'package:dart_guard/app/modules/main/views/login/viewmodel/login_viewmodel.dart';
+import 'package:dart_guard/app/modules/main/views/login/widgets/custom_check.dart';
+import 'package:dart_guard/app/modules/main/views/login/widgets/forgot_password.dart';
+import 'package:dart_guard/app/modules/main/views/login/widgets/login_mode_selector.dart';
+import 'package:dart_guard/app/modules/main/views/login/widgets/login_button.dart';
+import 'package:dart_guard/app/modules/main/views/login/widgets/login_text_field.dart';
 import 'package:dart_guard/app/shared/formatters/cpf_input_formatters.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

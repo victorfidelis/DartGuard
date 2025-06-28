@@ -1,5 +1,5 @@
-import 'package:dart_guard/app/modules/auth/login/widgets/login_form.dart';
-import 'package:dart_guard/app/modules/auth/login/widgets/social_media_links.dart';
+import 'package:dart_guard/app/modules/main/views/login/widgets/login_form.dart';
+import 'package:dart_guard/app/modules/main/views/login/widgets/social_media_links.dart';
 import 'package:dart_guard/app/shared/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 
