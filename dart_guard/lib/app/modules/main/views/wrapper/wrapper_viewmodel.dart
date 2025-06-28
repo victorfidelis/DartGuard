@@ -7,7 +7,7 @@ class WrapperViewmodel extends ChangeNotifier {
   bool get loggedInUser => user != null;
 
   void logIn(User user) {
-    user = user;
+    this.user = user;
     notifyListeners();
   }
 

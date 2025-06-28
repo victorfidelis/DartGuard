@@ -8,7 +8,7 @@ enum LoginMode { login, register }
 class LoginViewmodel extends ChangeNotifier {
   LoginService loginService;
   final Function(User user) onSuccessfulLogin;
-  
+
   LoginViewmodel({required this.loginService, required this.onSuccessfulLogin});
 
   LoginMode loginMode = LoginMode.login;
@@ -17,6 +17,7 @@ class LoginViewmodel extends ChangeNotifier {
   final TextEditingController documentController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final TextEditingController registerNameController = TextEditingController();
   final TextEditingController registerEmailController = TextEditingController();
   final TextEditingController registerDocumentController = TextEditingController();
   final TextEditingController registerPasswordController = TextEditingController();
@@ -28,8 +29,9 @@ class LoginViewmodel extends ChangeNotifier {
   String? errorDocument;
   String? errorPassword;
 
-  String? errorRegisterDocument;
+  String? errorRegisterName;
   String? errorRegisterEmail;
+  String? errorRegisterDocument;
   String? errorRegisterPassword;
   String? errorRegisterConfirmPassword;
 
@@ -37,6 +39,7 @@ class LoginViewmodel extends ChangeNotifier {
   void dispose() {
     documentController.dispose();
     passwordController.dispose();
+    registerNameController.dispose();
     registerEmailController.dispose();
     registerDocumentController.dispose();
     registerPasswordController.dispose();
@@ -81,6 +84,7 @@ class LoginViewmodel extends ChangeNotifier {
       loginError = signInEither.left!.message;
     } else {
       onSuccessfulLogin(signInEither.right!);
+      _clearControllers();
     }
 
     setToLoaded();
@@ -90,7 +94,7 @@ class LoginViewmodel extends ChangeNotifier {
     _clearErrors();
     bool isValid = true;
 
-    if (documentController.text.isEmpty) {
+    if (documentController.text.trim().isEmpty) {
       errorDocument = 'Informe o CPF';
       isValid = false;
     } else if (documentController.text.replaceAll(RegExp(r'\D'), '').length != 11) {
@@ -98,7 +102,7 @@ class LoginViewmodel extends ChangeNotifier {
       isValid = false;
     }
 
-    if (passwordController.text.isEmpty) {
+    if (passwordController.text.trim().isEmpty) {
       errorPassword = 'Informe a senha';
       isValid = false;
     } else if (passwordController.text.length < 6) {
@@ -115,8 +119,27 @@ class LoginViewmodel extends ChangeNotifier {
       return;
     }
 
+    final user = User(
+      id: '',
+      name: registerNameController.text,
+      email: registerEmailController.text,
+      document: registerDocumentController.text,
+      profilePicture: '',
+    );
+
     setToLoading();
-    await Future.delayed(Duration(seconds: 5));
+
+    final registerEither = await loginService.registerUser(
+      user: user,
+      password: passwordController.text,
+    );
+    if (registerEither.isLeft) {
+      registerError = registerEither.left!.message;
+    } else {
+      setToLoginMode();
+      _clearControllers();
+    }
+
     setToLoaded();
   }
 
@@ -124,7 +147,12 @@ class LoginViewmodel extends ChangeNotifier {
     _clearErrors();
     bool isValid = true;
 
-    if (registerEmailController.text.isEmpty) {
+    if (registerNameController.text.trim().isEmpty) {
+      errorRegisterName = 'Informe o nome';
+      isValid = false;
+    }
+
+    if (registerEmailController.text.trim().isEmpty) {
       errorRegisterEmail = 'Informe o e-mail';
       isValid = false;
     } else if (!registerEmailController.text.contains('@')) {
@@ -132,7 +160,7 @@ class LoginViewmodel extends ChangeNotifier {
       isValid = false;
     }
 
-    if (registerDocumentController.text.isEmpty) {
+    if (registerDocumentController.text.trim().isEmpty) {
       errorRegisterDocument = 'Informe o CPF';
       isValid = false;
     } else if (registerDocumentController.text.replaceAll(RegExp(r'\D'), '').length != 11) {
@@ -140,7 +168,7 @@ class LoginViewmodel extends ChangeNotifier {
       isValid = false;
     }
 
-    if (registerPasswordController.text.isEmpty) {
+    if (registerPasswordController.text.trim().isEmpty) {
       errorRegisterPassword = 'Informe a senha';
       isValid = false;
     } else if (registerPasswordController.text.length < 6) {
@@ -162,9 +190,20 @@ class LoginViewmodel extends ChangeNotifier {
     registerError = null;
     errorDocument = null;
     errorPassword = null;
-    errorRegisterDocument = null;
+    errorRegisterName = null;
     errorRegisterEmail = null;
+    errorRegisterDocument = null;
     errorRegisterPassword = null;
     errorRegisterConfirmPassword = null;
+  }
+
+  void _clearControllers() {
+    documentController.clear();
+    passwordController.clear();
+    registerNameController.clear();
+    registerEmailController.clear();
+    registerDocumentController.clear();
+    registerPasswordController.clear();
+    registerConfirmPasswordController.clear();
   }
 }

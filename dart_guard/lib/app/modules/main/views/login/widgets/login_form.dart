@@ -79,6 +79,12 @@ class LoginForm extends StatelessWidget {
                         menuLogin,
                         const SizedBox(height: 30),
                         LoginTextField(
+                          label: 'NOME',
+                          controller: state.registerNameController,
+                          error: state.errorRegisterName,
+                        ),
+                        const SizedBox(height: 10),
+                        LoginTextField(
                           label: 'EMAIL',
                           controller: state.registerEmailController,
                           isEmail: true,

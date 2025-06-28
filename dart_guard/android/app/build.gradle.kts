@@ -23,7 +23,7 @@ dependencies {
 android {
     namespace = "com.example.dart_guard"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973" //flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -39,10 +39,10 @@ android {
         applicationId = "com.example.dart_guard"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        minSdk = 26 //flutter.minSdkVersion
+        targetSdk = 35 //flutter.targetSdkVersion
+        versionCode = 100 //flutter.versionCode
+        versionName = "1.0.0" //flutter.versionName
     }
 
     buildTypes {

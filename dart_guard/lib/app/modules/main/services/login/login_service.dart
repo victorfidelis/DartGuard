@@ -52,7 +52,7 @@ class LoginService {
     if (emailEither.isRight) {
       return Either.left(UserAlredyExists('E-mail já cadastrado.'));
     }
-    if (emailEither.left! is UserNotFoundFailure) {
+    if (emailEither.left is! UserNotFoundFailure) {
       return Either.left(Failure(emailEither.left!.message));
     }
 
@@ -60,7 +60,7 @@ class LoginService {
     if (documentEither.isRight) {
       return Either.left(UserAlredyExists('CPF já cadastrado.'));
     }
-    if (documentEither.left! is UserNotFoundFailure) {
+    if (documentEither.left is! UserNotFoundFailure) {
       return Either.left(Failure(emailEither.left!.message));
     }
 
