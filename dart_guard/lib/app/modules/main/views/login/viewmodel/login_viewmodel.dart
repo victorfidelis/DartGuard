@@ -131,7 +131,7 @@ class LoginViewmodel extends ChangeNotifier {
 
     final registerEither = await loginService.registerUser(
       user: user,
-      password: passwordController.text,
+      password: registerPasswordController.text,
     );
     if (registerEither.isLeft) {
       registerError = registerEither.left!.message;
