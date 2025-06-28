@@ -1,4 +1,5 @@
 import 'package:dart_guard/app/modules/main/views/home/widgets/contract_section.dart';
+import 'package:dart_guard/app/modules/main/views/home/widgets/my_family_section.dart';
 import 'package:dart_guard/app/modules/main/views/home/widgets/user_card.dart';
 import 'package:dart_guard/app/modules/main/views/wrapper/wrapper_viewmodel.dart';
 import 'package:dart_guard/app/shared/widgets/app_logo.dart';
@@ -27,8 +28,17 @@ class HomeView extends StatelessWidget {
           SizedBox(height: 15),
           ContractSection(),
           SizedBox(height: 15),
-          SizedBox(height: 100),
-          TextButton(onPressed: context.read<WrapperViewmodel>().logOut, child: Text('Sair')),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                MyFamilySection(),
+                SizedBox(height: 15),
+                SizedBox(height: 100),
+                TextButton(onPressed: context.read<WrapperViewmodel>().logOut, child: Text('Sair')),
+              ],
+            ),
+          ),
         ],
       ),
     );
