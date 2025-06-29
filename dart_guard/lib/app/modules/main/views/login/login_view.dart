@@ -15,6 +15,8 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
+    final bool desktop = MediaQuery.of(context).size.width > 600;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -35,17 +37,18 @@ class _LoginViewState extends State<LoginView> {
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Padding(
-                padding: EdgeInsets.only(left: 50, top: 80, right: 50),
+                padding: EdgeInsets.only(left: 50, top: kIsWeb ? 28 : 70, right: 50),
                 child: Column(
-                  crossAxisAlignment: kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                  crossAxisAlignment: desktop ? CrossAxisAlignment.center : CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 34, child: AppLogo()),
-                    SizedBox(height: 20),
-                    Text('Bem vindo!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900)),
-                    SizedBox(height: 10),
+                    SizedBox(height: 28, child: AppLogo()),
+                    SizedBox(height: 15),
+                    Text('Bem vindo!', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+                    SizedBox(height: 15),
                     Text(
                       'Aqui você gerencia seus seguros e de seus familiares em poucos cliques',
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                      textAlign: desktop ? TextAlign.center : TextAlign.start,
                     ),
                   ],
                 ),
