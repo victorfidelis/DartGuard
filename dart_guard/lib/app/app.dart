@@ -12,6 +12,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: providers,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: MaterialTheme().dark(),
         initialRoute: '/wrapper',
         onGenerateRoute: appRoute,
