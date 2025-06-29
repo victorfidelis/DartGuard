@@ -150,6 +150,7 @@ class LoginViewmodel extends ChangeNotifier {
     if (registerNameController.text.trim().isEmpty) {
       errorRegisterName = 'Informe o nome';
       isValid = false;
+    }
 
     if (registerDocumentController.text.trim().isEmpty) {
       errorRegisterDocument = 'Informe o CPF';
@@ -157,7 +158,6 @@ class LoginViewmodel extends ChangeNotifier {
     } else if (registerDocumentController.text.replaceAll(RegExp(r'\D'), '').length != 11) {
       errorRegisterDocument = 'CPF inválido';
       isValid = false;
-    }
     }
 
     if (registerEmailController.text.trim().isEmpty) {

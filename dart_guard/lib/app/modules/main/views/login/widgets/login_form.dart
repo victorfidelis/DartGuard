@@ -3,7 +3,7 @@ import 'package:dart_guard/app/modules/main/views/login/widgets/custom_check.dar
 import 'package:dart_guard/app/shared/widgets/custom_text_link.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_mode_selector.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_button.dart';
-import 'package:dart_guard/app/modules/main/views/login/widgets/login_text_field.dart';
+import 'package:dart_guard/app/shared/widgets/custom_text_field.dart';
 import 'package:dart_guard/app/shared/formatters/cpf_input_formatters.dart';
 import 'package:dart_guard/app/shared/theme/theme_constants.dart';
 import 'package:dart_guard/app/shared/widgets/custom_text_error.dart';
@@ -47,7 +47,7 @@ class LoginForm extends StatelessWidget {
                       children: [
                         menuLogin,
                         const SizedBox(height: 30),
-                        LoginTextField(
+                        CustomTextField(
                           key: ValueKey('documentField'),
                           label: 'CPF',
                           controller: state.documentController,
@@ -55,7 +55,7 @@ class LoginForm extends StatelessWidget {
                           error: state.errorDocument,
                         ),
                         const SizedBox(height: 10),
-                        LoginTextField(
+                        CustomTextField(
                           key: ValueKey('passwordField'),
                           label: 'Senha',
                           controller: state.passwordController,
@@ -70,7 +70,10 @@ class LoginForm extends StatelessWidget {
                             Expanded(
                               child: CustomCheck(label: 'Lembrar sempre', initialValue: false, onChange: (value) {}),
                             ),
-                            CustomTextLink(label: 'Esqueceu a senha?', onTap: () {}),
+                            CustomTextLink(
+                              label: 'Esqueceu a senha?',
+                              onTap: () => Navigator.pushNamed(context, '/resetPassword'),
+                            ),
                           ],
                         ),
                       ],
@@ -81,14 +84,14 @@ class LoginForm extends StatelessWidget {
                       children: [
                         menuLogin,
                         const SizedBox(height: 30),
-                        LoginTextField(
+                        CustomTextField(
                           key: ValueKey('registerNameField'),
                           label: 'NOME',
                           controller: state.registerNameController,
                           error: state.errorRegisterName,
                         ),
                         const SizedBox(height: 10),
-                        LoginTextField(
+                        CustomTextField(
                           key: ValueKey('registerEmailField'),
                           label: 'EMAIL',
                           controller: state.registerEmailController,
@@ -96,7 +99,7 @@ class LoginForm extends StatelessWidget {
                           error: state.errorRegisterEmail,
                         ),
                         const SizedBox(height: 10),
-                        LoginTextField(
+                        CustomTextField(
                           key: ValueKey('registerDocumentField'),
                           label: 'CPF',
                           controller: state.registerDocumentController,
@@ -104,7 +107,7 @@ class LoginForm extends StatelessWidget {
                           error: state.errorRegisterDocument,
                         ),
                         const SizedBox(height: 10),
-                        LoginTextField(
+                        CustomTextField(
                           key: ValueKey('registerPasswordField'),
                           label: 'SENHA',
                           controller: state.registerPasswordController,
@@ -112,7 +115,7 @@ class LoginForm extends StatelessWidget {
                           error: state.errorRegisterPassword,
                         ),
                         const SizedBox(height: 10),
-                        LoginTextField(
+                        CustomTextField(
                           key: ValueKey('registerConfirmPasswordField'),
                           label: 'CONFIRMAÇÃO DE SENHA',
                           controller: state.registerConfirmPasswordController,

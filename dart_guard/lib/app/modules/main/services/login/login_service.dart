@@ -66,4 +66,19 @@ class LoginService {
 
     return Either.right(unit);
   }
+
+  Future<Either<Failure, String>> sendPasswordResetEmail({required String document}) async {
+    final userEither = await userRepository.getUserByDocument(document);
+    if (userEither.isLeft) {
+      return Either.left(userEither.left);
+    }
+
+    final user = userEither.right!;
+    final sendEmailEither = await authRepository.sendPasswordResetEmail(email: user.email);
+    if (sendEmailEither.isLeft) {
+      return Either.left(sendEmailEither.left);
+    }
+
+    return Either.right(user.email);
+  }
 }

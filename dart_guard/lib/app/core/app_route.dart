@@ -1,3 +1,4 @@
+import 'package:dart_guard/app/modules/main/views/reset_password/reset_password_view.dart';
 import 'package:dart_guard/app/modules/main/views/webview/webview_view.dart';
 import 'package:dart_guard/app/modules/main/views/wrapper/wrapper_view.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,10 @@ Route<dynamic>? appRoute(RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>;
     return _buildRoute(settings, WebviewView(url: args['url']));
   }
+  if (settings.name == '/resetPassword') {
+    return _buildRoute(settings, const ResetPasswordView());
+  }
+
   return null;
 }
 
