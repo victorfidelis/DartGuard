@@ -42,8 +42,8 @@ Como executar:
 - Faça as configurações iniciais:
   ```bash
   # Clone o repositório
-  git clone https://github.com/victorfidelis/flutter_posts_test.git
-  cd flutter_posts_test
+  git clone https://github.com/victorfidelis/flutter_posts_test.git](https://github.com/victorfidelis/DartGuard.git
+  cd DartGuard
   
   # Instale as dependências
   flutter pub get
