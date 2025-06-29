@@ -1,4 +1,4 @@
-import 'package:dart_guard/app/modules/main/views/webview.dart/webview_view.dart';
+import 'package:dart_guard/app/modules/main/views/webview/webview_view.dart';
 import 'package:dart_guard/app/modules/main/views/wrapper/wrapper_view.dart';
 import 'package:flutter/material.dart';
 
