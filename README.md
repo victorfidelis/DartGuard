@@ -43,7 +43,7 @@ Como executar:
   ```bash
   # Clone o repositório
   git clone https://github.com/victorfidelis/DartGuard.git
-  cd DartGuard
+  cd DartGuard/dart_guard
   
   # Instale as dependências
   flutter pub get
