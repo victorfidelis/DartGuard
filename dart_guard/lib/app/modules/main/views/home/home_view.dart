@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
         centerTitle: true,
         leading: Builder(
           builder: (context) {
-            return IconButton(icon: const Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer());
+            return IconButton(key: ValueKey('menuButton'), icon: const Icon(Icons.menu), onPressed: () => Scaffold.of(context).openDrawer());
           },
         ),
         actions: [IconButton(icon: const Icon(Icons.notifications), onPressed: () {})],

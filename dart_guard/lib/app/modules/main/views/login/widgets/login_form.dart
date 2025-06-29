@@ -48,6 +48,7 @@ class LoginForm extends StatelessWidget {
                         menuLogin,
                         const SizedBox(height: 30),
                         LoginTextField(
+                          key: ValueKey('documentField'),
                           label: 'CPF',
                           controller: state.documentController,
                           inputFormatters: [CpfInputFormatter()],
@@ -55,6 +56,7 @@ class LoginForm extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         LoginTextField(
+                          key: ValueKey('passwordField'),
                           label: 'Senha',
                           controller: state.passwordController,
                           isPassword: true,
@@ -80,12 +82,14 @@ class LoginForm extends StatelessWidget {
                         menuLogin,
                         const SizedBox(height: 30),
                         LoginTextField(
+                          key: ValueKey('registerNameField'),
                           label: 'NOME',
                           controller: state.registerNameController,
                           error: state.errorRegisterName,
                         ),
                         const SizedBox(height: 10),
                         LoginTextField(
+                          key: ValueKey('registerEmailField'),
                           label: 'EMAIL',
                           controller: state.registerEmailController,
                           isEmail: true,
@@ -93,6 +97,7 @@ class LoginForm extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         LoginTextField(
+                          key: ValueKey('registerDocumentField'),
                           label: 'CPF',
                           controller: state.registerDocumentController,
                           inputFormatters: [CpfInputFormatter()],
@@ -100,6 +105,7 @@ class LoginForm extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         LoginTextField(
+                          key: ValueKey('registerPasswordField'),
                           label: 'SENHA',
                           controller: state.registerPasswordController,
                           isPassword: true,
@@ -107,6 +113,7 @@ class LoginForm extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         LoginTextField(
+                          key: ValueKey('registerConfirmPasswordField'),
                           label: 'CONFIRMAÇÃO DE SENHA',
                           controller: state.registerConfirmPasswordController,
                           isPassword: true,
@@ -135,6 +142,7 @@ class LoginForm extends StatelessWidget {
                 Consumer<LoginViewmodel>(
                   builder: (context, state, _) {
                     return LoginButtom(
+                      key: ValueKey('loginButton'),
                       onTap: state.inLoginMode ? state.doLogin : state.doRegister,
                       isLoading: state.isLoading,
                     );

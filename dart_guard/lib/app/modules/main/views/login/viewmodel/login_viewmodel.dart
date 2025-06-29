@@ -150,6 +150,14 @@ class LoginViewmodel extends ChangeNotifier {
     if (registerNameController.text.trim().isEmpty) {
       errorRegisterName = 'Informe o nome';
       isValid = false;
+
+    if (registerDocumentController.text.trim().isEmpty) {
+      errorRegisterDocument = 'Informe o CPF';
+      isValid = false;
+    } else if (registerDocumentController.text.replaceAll(RegExp(r'\D'), '').length != 11) {
+      errorRegisterDocument = 'CPF inválido';
+      isValid = false;
+    }
     }
 
     if (registerEmailController.text.trim().isEmpty) {
@@ -160,19 +168,11 @@ class LoginViewmodel extends ChangeNotifier {
       isValid = false;
     }
 
-    if (registerDocumentController.text.trim().isEmpty) {
-      errorRegisterDocument = 'Informe o CPF';
-      isValid = false;
-    } else if (registerDocumentController.text.replaceAll(RegExp(r'\D'), '').length != 11) {
-      errorRegisterDocument = 'CPF inválido';
-      isValid = false;
-    }
-
     if (registerPasswordController.text.trim().isEmpty) {
       errorRegisterPassword = 'Informe a senha';
       isValid = false;
     } else if (registerPasswordController.text.length < 6) {
-      errorRegisterPassword = 'Senha deve ter ao menos 6 caracteres';
+      errorRegisterPassword = 'Senha deve ter pelo menos 6 caracteres';
       isValid = false;
     }
 

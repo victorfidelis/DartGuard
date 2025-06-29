@@ -56,7 +56,7 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
           Positioned(left: 1, right: 1, bottom: 100, child: SocialMediaLinks()),
-          LoginForm(),
+          LoginForm(key: ValueKey('loginForm')),
         ],
       ),
     );

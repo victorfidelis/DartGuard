@@ -67,7 +67,7 @@ class MenuDrawer extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16, top: 10, bottom: 40),
-            child: CustomTextLink(label: 'Sair', onTap: context.read<WrapperViewmodel>().logOut),
+            child: CustomTextLink(key: ValueKey('logOutButton'), label: 'Sair', onTap: context.read<WrapperViewmodel>().logOut),
           ),
           HelpCard(),
         ],
