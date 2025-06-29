@@ -42,7 +42,7 @@ Como executar:
 - Faça as configurações iniciais:
   ```bash
   # Clone o repositório
-  git clone https://github.com/victorfidelis/flutter_posts_test.git](https://github.com/victorfidelis/DartGuard.git
+  git clone https://github.com/victorfidelis/DartGuard.git
   cd DartGuard
   
   # Instale as dependências
