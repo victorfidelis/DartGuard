@@ -1,3 +1,5 @@
+import 'package:dart_guard/app/modules/main/repositories/login_storage/login_storage_repository.dart';
+import 'package:dart_guard/app/modules/main/repositories/login_storage/shared_preferences_login_storage_repository.dart';
 import 'package:dart_guard/app/modules/main/repositories/user/firebase_user_repository.dart';
 import 'package:dart_guard/app/modules/main/repositories/user/user_repository.dart';
 import 'package:dart_guard/app/modules/main/services/login/login_service.dart';
@@ -14,11 +16,17 @@ final providers = [
   Provider<CustomNotifications>(create: (context) => CustomNotificationsImplement()),
   Provider<AuthRepository>(create: (context) => FirebaseAuthRepository()),
   Provider<UserRepository>(create: (context) => FirebaseUserRepository()),
+  Provider<LoginStorageRepository>(create: (context) => SharedPreferencesLoginStorageRepository()),
   Provider<LoginService>(
     create: (context) {
       final authRepository = context.read<AuthRepository>();
       final userRepository = context.read<UserRepository>();
-      return LoginService(authRepository: authRepository, userRepository: userRepository);
+      final loginStorageRepository = context.read<LoginStorageRepository>();
+      return LoginService(
+        authRepository: authRepository,
+        userRepository: userRepository,
+        loginStorageRepository: loginStorageRepository,
+      );
     },
   ),
   ChangeNotifierProvider<LoginViewmodel>(

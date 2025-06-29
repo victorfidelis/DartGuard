@@ -1,5 +1,7 @@
+import 'package:dart_guard/app/modules/main/models/login_storage.dart';
 import 'package:dart_guard/app/modules/main/models/user.dart';
 import 'package:dart_guard/app/modules/main/repositories/auth/auth_repository.dart';
+import 'package:dart_guard/app/modules/main/repositories/login_storage/login_storage_repository.dart';
 import 'package:dart_guard/app/modules/main/repositories/user/user_repository.dart';
 import 'package:dart_guard/app/shared/either/either.dart';
 import 'package:dart_guard/app/shared/failures/auth_failures.dart';
@@ -8,10 +10,15 @@ import 'package:dart_guard/app/shared/failures/failure.dart';
 class LoginService {
   AuthRepository authRepository;
   UserRepository userRepository;
+  LoginStorageRepository loginStorageRepository;
 
-  LoginService({required this.authRepository, required this.userRepository});
+  LoginService({required this.authRepository, required this.userRepository, required this.loginStorageRepository});
 
-  Future<Either<Failure, User>> signIn({required String document, required String password}) async {
+  Future<Either<Failure, User>> signIn({
+    required String document,
+    required String password,
+    required bool rememberUser,
+  }) async {
     final userEither = await userRepository.getUserByDocument((document));
     if (userEither.isLeft) {
       return Either.left(userEither.left!);
@@ -21,6 +28,12 @@ class LoginService {
     final authEither = await authRepository.signInEmailPassword(email: user.email, password: password);
     if (authEither.isLeft) {
       return Either.left(authEither.left!);
+    }
+
+    if (rememberUser) {
+      await loginStorageRepository.saveCredentials(LoginStorage(document: document, password: password));
+    } else {
+      await loginStorageRepository.clearCredentials();
     }
 
     return Either.right(user);
@@ -80,5 +93,9 @@ class LoginService {
     }
 
     return Either.right(user.email);
+  }
+
+  Future<Either<Failure, LoginStorage>> getLoginStorage() async {
+    return await loginStorageRepository.getSavedCredentials();
   }
 }

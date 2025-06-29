@@ -1,5 +1,6 @@
 import 'package:dart_guard/app/modules/main/models/user.dart';
 import 'package:dart_guard/app/modules/main/repositories/auth/auth_repository.dart';
+import 'package:dart_guard/app/modules/main/repositories/login_storage/login_storage_repository.dart';
 import 'package:dart_guard/app/modules/main/repositories/user/user_repository.dart';
 import 'package:dart_guard/app/modules/main/services/login/login_service.dart';
 import 'package:dart_guard/app/shared/either/either.dart';
@@ -12,15 +13,23 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
+class MockLoginStorageRepository extends Mock implements LoginStorageRepository {}
+
 void main() {
   late LoginService service;
   late MockAuthRepository mockAuthRepository;
   late MockUserRepository mockUserRepository;
+  late MockLoginStorageRepository mockLoginStorageRepository;
 
   setUp(() {
     mockAuthRepository = MockAuthRepository();
     mockUserRepository = MockUserRepository();
-    service = LoginService(authRepository: mockAuthRepository, userRepository: mockUserRepository);
+    mockLoginStorageRepository = MockLoginStorageRepository();
+    service = LoginService(
+      authRepository: mockAuthRepository,
+      userRepository: mockUserRepository,
+      loginStorageRepository: mockLoginStorageRepository,
+    );
   });
 
   group('signIn', () {
@@ -39,7 +48,7 @@ void main() {
         () => mockAuthRepository.signInEmailPassword(email: testUser.email, password: '123456'),
       ).thenAnswer((_) async => Either.right(unit));
 
-      final result = await service.signIn(document: '12345678901', password: '123456');
+      final result = await service.signIn(document: '12345678901', password: '123456', rememberUser: false);
 
       expect(result.isRight, true);
       expect(result.right, testUser);
@@ -50,7 +59,7 @@ void main() {
         () => mockUserRepository.getUserByDocument('12345678901'),
       ).thenAnswer((_) async => Either.left(UserNotFoundFailure('Usuário não encontrado')));
 
-      final result = await service.signIn(document: '12345678901', password: '123456');
+      final result = await service.signIn(document: '12345678901', password: '123456', rememberUser: false);
 
       expect(result.isLeft, true);
       expect(result.left, isA<Failure>());
@@ -63,7 +72,7 @@ void main() {
         () => mockAuthRepository.signInEmailPassword(email: testUser.email, password: '123456'),
       ).thenAnswer((_) async => Either.left(Failure('Senha inválida')));
 
-      final result = await service.signIn(document: '12345678901', password: '123456');
+      final result = await service.signIn(document: '12345678901', password: '123456', rememberUser: false);
 
       expect(result.isLeft, true);
       expect(result.left!.message, 'Senha inválida');
@@ -71,7 +80,13 @@ void main() {
   });
 
   group('registerUser', () {
-    final newUser = User(id: '', name: 'Victor Novo', email: 'victornovo@email.com', document: '98765432101', profilePicture: '');
+    final newUser = User(
+      id: '',
+      name: 'Victor Novo',
+      email: 'victornovo@email.com',
+      document: '98765432101',
+      profilePicture: '',
+    );
 
     test('deve registrar usuário com sucesso', () async {
       when(

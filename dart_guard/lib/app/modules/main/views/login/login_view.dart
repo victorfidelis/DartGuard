@@ -1,9 +1,11 @@
+import 'package:dart_guard/app/modules/main/views/login/viewmodel/login_viewmodel.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/login_form.dart';
 import 'package:dart_guard/app/modules/main/views/login/widgets/social_media_links.dart';
 import 'package:dart_guard/app/shared/theme/theme_constants.dart';
 import 'package:dart_guard/app/shared/widgets/app_logo.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -13,6 +15,13 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+
+  @override
+  void initState() {
+    context.read<LoginViewmodel>().loadLoginStorage();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool desktop = MediaQuery.of(context).size.width > 600;

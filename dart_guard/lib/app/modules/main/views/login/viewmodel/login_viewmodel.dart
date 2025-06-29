@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 enum LoginMode { login, register }
 
 class LoginViewmodel extends ChangeNotifier {
-  LoginService loginService;
+  final LoginService loginService;
   final Function(User user) onSuccessfulLogin;
 
   LoginViewmodel({required this.loginService, required this.onSuccessfulLogin});
@@ -16,6 +16,7 @@ class LoginViewmodel extends ChangeNotifier {
 
   final TextEditingController documentController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool rememberUser = false;
 
   final TextEditingController registerNameController = TextEditingController();
   final TextEditingController registerEmailController = TextEditingController();
@@ -69,6 +70,10 @@ class LoginViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setRememberUser(bool value) {
+    rememberUser = value;
+  }
+
   Future<void> doLogin() async {
     if (!_validateLogin()) {
       return;
@@ -79,6 +84,7 @@ class LoginViewmodel extends ChangeNotifier {
     final signInEither = await loginService.signIn(
       document: documentController.text,
       password: passwordController.text,
+      rememberUser: rememberUser,
     );
     if (signInEither.isLeft) {
       loginError = signInEither.left!.message;
@@ -205,5 +211,19 @@ class LoginViewmodel extends ChangeNotifier {
     registerDocumentController.clear();
     registerPasswordController.clear();
     registerConfirmPasswordController.clear();
+  } 
+
+  Future<void> loadLoginStorage() async {
+    final loginStorageEither = await loginService.getLoginStorage();
+    if (loginStorageEither.isLeft) {
+      setRememberUser(false);
+      return;
+    }
+    final loginStorage = loginStorageEither.right!; 
+
+    documentController.text = loginStorage.document;
+    passwordController.text = loginStorage.password;
+    setRememberUser(true);
+    notifyListeners();
   }
 }

@@ -68,7 +68,11 @@ class LoginForm extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: CustomCheck(label: 'Lembrar sempre', initialValue: false, onChange: (value) {}),
+                              child: CustomCheck(
+                                label: 'Lembrar sempre',
+                                value: state.rememberUser,
+                                onChange: state.setRememberUser,
+                              ),
                             ),
                             CustomTextLink(
                               label: 'Esqueceu a senha?',

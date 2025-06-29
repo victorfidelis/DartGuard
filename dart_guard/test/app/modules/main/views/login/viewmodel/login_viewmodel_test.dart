@@ -39,7 +39,13 @@ void main() {
 
       expect(viewmodel.errorDocument, 'Informe o CPF');
       expect(viewmodel.errorPassword, 'Informe a senha');
-      verifyNever(() => mockLoginService.signIn(document: any(named: 'document'), password: any(named: 'password')));
+      verifyNever(
+        () => mockLoginService.signIn(
+          document: any(named: 'document'),
+          password: any(named: 'password'),
+          rememberUser: any(named: 'remenberUser'),
+        ),
+      );
     });
 
     test('deve mostrar erro de senha curta', () async {
@@ -49,7 +55,13 @@ void main() {
       await viewmodel.doLogin();
 
       expect(viewmodel.errorPassword, 'Senha muito curta');
-      verifyNever(() => mockLoginService.signIn(document: any(named: 'document'), password: any(named: 'password')));
+      verifyNever(
+        () => mockLoginService.signIn(
+          document: any(named: 'document'),
+          password: any(named: 'password'),
+          rememberUser: any(named: 'remenberUser'),
+        ),
+      );
     });
 
     test('deve chamar loginService.signIn e executar callback em sucesso', () async {
@@ -58,7 +70,7 @@ void main() {
       viewmodel.passwordController.text = '123456';
 
       when(
-        () => mockLoginService.signIn(document: '12345678901', password: '123456'),
+        () => mockLoginService.signIn(document: '12345678901', password: '123456', rememberUser: false),
       ).thenAnswer((_) async => Either.right(user));
 
       await viewmodel.doLogin();
@@ -74,7 +86,7 @@ void main() {
       viewmodel.passwordController.text = '123456';
 
       when(
-        () => mockLoginService.signIn(document: '12345678901', password: '123456'),
+        () => mockLoginService.signIn(document: '12345678901', password: '123456', rememberUser: false),
       ).thenAnswer((_) async => Either.left(Failure('Erro de login')));
 
       await viewmodel.doLogin();
